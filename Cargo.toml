@@ -1,8 +1,13 @@
 [package]
-name = "gol-be"
+name = "golbe"
 version = "0.1.0"
 authors = ["Robin van Leeuwen <robin@mintlab.nl>"]
 edition = "2018"
+
+[lib]
+name = "golbe"
+path = "src/lib.rs"
+test = false
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -13,3 +18,4 @@ warp = "0.2.5"
 parking_lot = "0.11.1"
 serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "0.2", features = ["macros"] }
+serde_json = "1.0.60"

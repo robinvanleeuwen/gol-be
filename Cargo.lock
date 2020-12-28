@@ -302,13 +302,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "gol-be"
+name = "golbe"
 version = "0.1.0"
 dependencies = [
  "diesel",
  "dotenv",
  "parking_lot",
  "serde",
+ "serde_json",
  "tokio",
  "warp",
 ]

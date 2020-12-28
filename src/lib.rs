@@ -2,14 +2,15 @@
 extern crate diesel;
 extern crate dotenv;
 
-pub mod schema;
-pub mod models;
+mod models;
+mod schema;
 
+use schema::runcount;
+use models::{RunCount, NewRunCount};
 use diesel::prelude::*;
 use diesel::pg::PgConnection;
 use dotenv::dotenv;
 use std::env;
-use self::models::{RunCount, NewRunCount};
 
 pub fn establish_connection() -> PgConnection {
     dotenv().ok();
@@ -20,17 +21,16 @@ pub fn establish_connection() -> PgConnection {
         .expect(&format!("Error connecting to {}", database_url))
 }
 
-pub fn new_run_count<'a>(conn: &PgConnection, run: i32, count: i32) -> QueryResult<RunCount>{
-    use schema::runcount;
+pub fn new_run_count<'a>(conn: &PgConnection, run: &i32, count: &i32) -> QueryResult<RunCount>{
     let new_run_count = NewRunCount {
-        run: &Some(run),
-        count: &Some(count),
+        run,
+        count,
     };
 
     let result = diesel::insert_into(runcount::table)
         .values(&new_run_count)
         .get_result(conn);
 
+    println!("{:?}", result);
     result
-
 }
